@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
+const templateRoutes = require('./routes/template'); 
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api', templateRoutes); // - templates will be at /api/templates
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -24,7 +26,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/campizo')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hrishikesh:hrishikesh@cluster0.kiocuci.mongodb.net/?appName=Cluster0')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
